@@ -1,0 +1,45 @@
+[tool.black]
+line-length = 120
+target-version = ['py310']
+include = '\.pyi?$'
+
+[tool.flake8]
+# https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#line-length
+max-line-length = 120
+
+extend-select = [
+    # B950 https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#line-length
+    # B950 https://github.com/PyCQA/flake8-bugbear#opinionated-warnings
+    'B950',
+]
+extend-ignore = [
+    # E203 https://github.com/PyCQA/pycodestyle/issues/373
+    # E203 https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#slices
+    'E203',
+    # E501 https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#line-length
+    'E501',
+    # D105 magic methods don't need docstrings
+    'D105',
+    # D106 ignore because django often needs nested class 'Meta'
+    'D106'
+]
+extend-exclude = [
+    # This contains our built documentation
+    'build',
+    # This contains builds of flake8 that we don't want to check
+    'dist',
+]
+
+per-file-ignores = [
+    # Documentation is from GitLab API website.
+    "src/security/GitlabAPI.py:D401"
+]
+
+# McCabe Cyclomatic Complexity
+max-complexity = 12
+
+# https://pypi.org/project/flake8-docstrings/
+# Select PEP257 and PEP 287 – reStructuredText
+docstring-convention = 'pep257'
+import-order-style = 'google'
+application-import-names = 'security'
